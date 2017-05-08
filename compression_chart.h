@@ -4,7 +4,9 @@
 #include <QWidget>
 #include <string>
 #include "lzw.h"
-//#include "qcustomplot.h"
+
+class QCustomPlot;
+
 
 class Compression_chart : public QWidget
 {
@@ -32,7 +34,9 @@ private:
     long long size_of_coded_file1;
     long long size_of_coded_file2;
     long long size_of_coded_file3;
-    //QCustomPlot* plot;
+
+    QCustomPlot* plot;
+    void render_chart();
 };
 
 #endif // COMPRESSION_CHART_H

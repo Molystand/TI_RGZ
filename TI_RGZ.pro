@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = TI_RGZ
 TEMPLATE = app
@@ -25,10 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         compression_chart.cpp \
-    lzw.cpp
+    lzw.cpp \
+    qcustomplot.cpp
 
 HEADERS  += compression_chart.h \
-    lzw.h
+    lzw.h \
+    qcustomplot.h
 
 DISTFILES += \
     .gitignore
