@@ -1,0 +1,8 @@
+debug/
+release/
+
+*qmake*
+Makefile*
+*user*
+
+*.txt
