@@ -6,12 +6,13 @@
 
 int main(int argc, char *argv[])
 {
-    /*QApplication a(argc, argv);
+    QApplication a(argc, argv);
     Compression_chart w;
     w.show();
 
-    return a.exec();*/
+    return a.exec();
 
+    /*
     std::ifstream infile ("message.txt");
     std::ofstream outfile("coded.txt");
 
@@ -23,4 +24,5 @@ int main(int argc, char *argv[])
     std::ofstream outfile1("decoded.txt");
 
     LZW_decode(infile1, outfile1);
+    */
 }
