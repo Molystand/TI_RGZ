@@ -1,7 +1,7 @@
+// lzw.cpp
 #include "lzw.h"
 #include <map>
 #include <string>
-
 
 // Возвращает таблицу, содержащую все односимвольные фразы и их коды.
 std::map<std::string, int> create_dictionary()
@@ -10,9 +10,9 @@ std::map<std::string, int> create_dictionary()
     int code = 0;
     std::string str;
 
-    for (char ch = ' '; ch <= 'z'; ch++, code++)
+    for (/*unsigned char*/int ch = ' '; ch <= /*(unsigned char)*/255/*'z'*/; ch++, code++)
     {
-        dictionary[str = ch] = code;
+        dictionary[str = (unsigned char)ch] = code;
     }
     dictionary["\n"] = code;
 
@@ -25,9 +25,9 @@ std::map<int, std::string> create_reverse_dictionary()
     std::map<int, std::string> dictionary;
     int code = 0;
 
-    for (char ch = ' '; ch <= 'z'; ch++, code++)
+    for (/*unsigned char*/int ch = ' '; ch <= /*(unsigned char)*/255/*'z'*/; ch++, code++)
     {
-        dictionary[code] = ch;
+        dictionary[code] = (unsigned char)ch;
     }
     dictionary[code] = '\n';
 
@@ -75,8 +75,8 @@ void LZW_decode(std::ifstream& infile, std::ofstream& outfile)
     // Инициализируем словарь
     std::map<int, std::string> dictionary = create_reverse_dictionary();
 
-    int code;                   // Очередной код из сообщения (Y)
-    int old_code;               // Код (X)
+    int code;
+    int old_code;
     std::string out_str;
 
     infile.read((char*)&code, sizeof(code));//infile >> code;
@@ -90,10 +90,10 @@ void LZW_decode(std::ifstream& infile, std::ofstream& outfile)
             break;
 
         int size = dictionary.size();
-        if (code < size)        /// Если фраза с кодом X есть в словаре
+        if (code < size)
         {
             /*outfile.write((char*)&dictionary[code], sizeof(dictionary[code]));//*/outfile << dictionary[code];                                        /// Записываем в файл фразу с кодом X
-            dictionary[size] = dictionary[old_code] + dictionary[code][0];      // Заносим фразу с кодом XY в словарь
+            dictionary[size] = dictionary[old_code] + dictionary[code][0];
             old_code = code;
         }
         else

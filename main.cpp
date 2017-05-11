@@ -1,3 +1,4 @@
+// main.cpp
 #include "compression_chart.h"
 #include <QApplication>
 

@@ -1,3 +1,4 @@
+// lzw.h
 #pragma once
 #include <fstream>
 

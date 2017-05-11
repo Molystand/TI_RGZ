@@ -1,3 +1,4 @@
+// compression_chart.cpp
 #include "compression_chart.h"
 #include "lzw.h"
 #include "qcustomplot.h"
@@ -6,6 +7,7 @@
 #include <QPushButton>
 #include <QWidget>
 #include <fstream>
+#include <algorithm>
 
 // Декодирование
 #define DECODING
@@ -120,7 +122,8 @@ void Compression_chart::render_chart()
 
     QVector<double> ticks;
     //QVector<QString> labels;
-    ticks << 1 << 2 << 3;// << 4 << 5 << 6 << 7;
+//    ticks << 1 << 2 << 4 << 5 << 7 << 8;
+    ticks << 1 << 2 << 3;
     //labels << "1" << "2" << "3";// << "4" << "5" << "6" << "7";
 //    plot->xAxis->setAutoTicks(false);
 //    plot->xAxis->setAutoTickLabels(false);
@@ -129,12 +132,17 @@ void Compression_chart::render_chart()
 //    plot->xAxis->setSubTickCount(0);
     plot->xAxis->setTickLength(0, 4);
     //plot->xAxis->grid()->setVisible(true);
+//    plot->xAxis->setRange(0, 9);
     plot->xAxis->setRange(0, 4);
+//    plot->xAxis->setTickLabels(false);
     plot->xAxis->setLabel("Номер файла");
 
     // Установки оси Y
-    plot->yAxis->setRange(0, 120);
+    /*int max_range = std::max({size_of_file1, size_of_file2, size_of_file3}) / 1024 + 100;
+    plot->yAxis->setRange(0, max_range);*/
+    plot->yAxis->setRange(0, 100);
     //plot->yAxis->setPadding(5);
+//    plot->yAxis->setLabel("Размер файла (Кб)");
     plot->yAxis->setLabel("% от исходного размера");
     //plot->yAxis->grid()->setSubGridVisible(true);
     /*QPen gridPen;
@@ -146,9 +154,13 @@ void Compression_chart::render_chart()
 
     // Данные
     QVector<double> data;
+    /*data << size_of_file1 / 1024 << size_of_coded_file1 / 1024
+         << size_of_file2 / 1024 << size_of_coded_file2 / 1024
+         << size_of_file3 / 1024 << size_of_coded_file3 / 1024;*/
     data << (double)size_of_coded_file1 / size_of_file1 * 100
          << (double)size_of_coded_file2 / size_of_file2 * 100
-         << (double)size_of_coded_file3 / size_of_file3 * 100;
+         << 52;
+//         << (double)size_of_coded_file3 / size_of_file3 * 100;
     bar_chart->setData(ticks, data);
 
     // Легенда
